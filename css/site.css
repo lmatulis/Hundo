@@ -107,3 +107,13 @@ footer i {
 footer i:hover {
     color: var(--cf-theme-300);
 }
+
+.even {
+    font-weight: bold;
+    color: red;
+}
+
+.odd{
+    font-style: italic;
+    color: purple;
+}
