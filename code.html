@@ -81,22 +81,96 @@
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-javascript">
-                        //Get values from the screen and display
-                        function getValues2() {
-                        let message = document.getElementById("message").value
-                        let alertbox = document.getElementById("alertBox")
+                        //get values from user
+                        function getValues() {
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
                         
-                        alertbox.innerText = message
+                            //parse input values into integers
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+                        
+                            //check to see if values are int
+                            if(Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                                //generate numbers
+                                let numbers = generateNumbers(startValue, endValue)
+                        
+                                //display the output
+                                displayNumbers(numbers)
+                            } else {
+                                alert("Only integers allowed. Please enter a number.")
+                            }
                         }
+
+                        //generates numbers
+                        function generateNumbers(startValue, endValue) {
+                            let numbers = [];
                         
-                        //document.getElementById("btn-submit").addEventListener("click", getValues2);
+                            for(i = startValue; i &lt;= endValue; i++) {
+                                numbers.push(i);
+                            }
+                            return numbers; 
+                        }
+
+                        //displays numbers
+                        function displayNumbers(numbers) {
+                            let templateCols = "";
+
+                            //&lt;div>0&lt;/div>
+                            for(let index = 0; index &lt; numbers.length; index++) {
+                                
+                                let className = "";
+                                if(numbers[index] % 2 == 0) {
+                                    className = "even";
+                                }else{
+                                    className = "odd";
+                                }
+                                templateCols += `&lt;div class="${className}">${numbers[index]}&lt;/div>`;
+                            }
+                            
+                            document.getElementById("resultsData").innerHTML = templateCols;
+
+                        }
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <p>The code is structured in one function</p>
-                <h5>getValues2</h5>
-                <p>Displays the user message</p>
+                <h3>Overview</h3>
+                <p>
+                    This script is designed to take two integer inputs from the user, generate a list of numbers between those two integers,
+                    and display these numbers on a webpage, with even and odd numbers having different CSS classes.
+                </p>
+                <p>
+                    This JavaScript code snippet defines three functions: getValues, generateNumbers, and displayNumbers. Here's a breakdown
+                    of what each function does:
+                </p>
+                <h5>getValues()</h5>
+                <p>
+                    This function retrieves values from two input fields with IDs startValue and endValue. 
+                    It converts these input values from strings to integers using parseInt. 
+                    It checks if both values are integers using Number.isInteger. 
+                    f the values are integers, it calls generateNumbers to create an array of numbers from startValue to endValue and then
+                    calls displayNumbers to display these numbers. 
+                    If the values are not integers, it shows an alert saying "Only integers allowed. Please enter a number."
+                </p>
+                <h5>generateNumbers(startValue, endValue)</h5>
+                <p>
+                    This function takes two integer arguments, startValue and endValue. 
+                    It creates an empty array numbers. 
+                    It uses a for loop to generate numbers from startValue to endValue, pushing each number into the numbers array. 
+                    It returns the numbers array.
+                </p>
+                <h5>displayNumbers(numbers)</h5>
+                <p>
+                    This function takes an array of numbers as an argument. 
+                    It initializes an empty string templateCols. 
+                    It iterates through the numbers array using a for loop. 
+                    For each number, it checks if the number is even or odd and assigns a corresponding class name ("even" for even numbers
+                    and "odd" for odd numbers). 
+                    It creates a string of HTML &lt;div> elements with the appropriate class names and the numbers as their inner text. 
+                    It sets the innerHTML of an element with the ID resultsData to templateCols, which effectively displays the numbers on
+                    the webpage with the assigned classes.
+                </p>
             </div>
         </div>
     </main>
